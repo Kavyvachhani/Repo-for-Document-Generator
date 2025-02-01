@@ -1,0 +1,29 @@
+
+Phase 1 Breakdown:
+
+🔴 Step 1: Load Order Hijacking Detection
+
+    Kauravas ek PowerShell script banayenge jo Load Order Hijacking vulnerabilities ko detect karegi.
+    Yeh script check karegi ki Friend VM me kaunse signed executables vulnerable hain.
+
+🔴 Step 2: DLL Injection using Load Order Hijacking
+
+    Ek C, C++, ya Rust based DLL banani hogi jo legitimate executable ke through load ho sake.
+    DLL ka kaam hoga shellcode inject karna jo Havoc C2 Agent (Demon Agent) ko run karega.
+    Objective: Havoc C2 ke saath callback connection establish karna.
+
+🔴 Step 3: Malicious Shortcut (.LNK) Creation
+
+    Ek Python script likhni hogi jo:
+        Executable path (jo step 1 me identify kiya gaya) aur DLL ka target URL le.
+        Shortcut (.LNK) file generate kare jo PowerShell ka use karke DLL ko download kare.
+        Vulnerable executable ko copy aur launch kare taaki DLL hijacking successfully execute ho.
+        Havoc C2 server se connection establish ho jaaye jab bhi shortcut open ho.
+        
+Expected Outcomes & Cybersecurity Concepts Used:
+
+✅ Load Order Hijacking – Malicious DLL ko signed executable ke context me load karna.
+✅ DLL Injection & Code Execution – DLL ke andar shellcode inject karna jo Havoc C2 Agent ko execute karega.
+✅ Shortcut Exploitation – PowerShell aur LNK file ka use karke stealthy malware delivery.
+✅ Red Teaming & Persistence – Long-term access maintain karna bina detection ke.
+

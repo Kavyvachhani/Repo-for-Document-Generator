@@ -1,0 +1,10 @@
+$executables = Get-ChildItem -Path "C:\Windows\System32" -Filter "*.exe" -Recurse
+foreach ($exe in $executables) {
+    $signature = Get-AuthenticodeSignature $exe.FullName
+    if ($signature.Status -eq 'Valid') {
+        $dllPath = [System.IO.Path]::ChangeExtension($exe.FullName, ".dll")
+        if (-Not (Test-Path $dllPath)) {
+            Write-Host "Potential Load Order Hijacking: $exe.FullName"
+        }
+    }
+}
